@@ -3,6 +3,7 @@ package app
 import (
 	"awesomeProject/internal/bootstrap"
 	"awesomeProject/internal/config"
+	"awesomeProject/internal/services/socksservice"
 )
 
 func Run(cfg config.Config) error {
@@ -11,5 +12,5 @@ func Run(cfg config.Config) error {
 		return err
 	}
 
-	socksService := socksservice.New()
+	socksService := socksservice.New(socksgorm.New(db))
 }

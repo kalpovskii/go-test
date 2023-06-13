@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesomeProject/internal/app"
 	"awesomeProject/internal/config"
 	"github.com/caarlos0/env"
 	"log"
