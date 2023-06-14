@@ -74,7 +74,7 @@ func (ss *SocksService) Get(w http.ResponseWriter, r *http.Request) {
 		CottonPart: int64(cottonPart),
 	}
 
-	if err := ss.socksRepository.Get(r.Context(), &s, operation); err != nil {
+	if _, err := ss.socksRepository.Get(r.Context(), &s, operation); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
