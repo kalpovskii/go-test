@@ -23,12 +23,9 @@ func (r *SocksGorm) Create(ctx context.Context, s *socksrepository.Socks) error 
 }
 
 func (r *SocksGorm) Get(ctx context.Context, s *socksrepository.Socks, operation string) (int64, error) {
-	validOperations := map[string]bool{
-		"moreThan": true,
-		"lessThan": true,
-		"equal":    true,
-	}
-	if !validOperations[operation] {
+	switch operation {
+	case "moreThan", "lessThan", "equal":
+	default:
 		return 0, errors.New("incorrect operation")
 	}
 
