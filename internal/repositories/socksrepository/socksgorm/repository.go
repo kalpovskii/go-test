@@ -43,7 +43,7 @@ func (r *SocksGorm) Get(ctx context.Context, s *socksrepository.Socks, operation
 	}
 
 	var totalCount int64
-	err := query.Count(&totalCount).Error
+	err := query.Select("quantity").Debug().Scan(&totalCount).Error
 	if err != nil {
 		return 0, fmt.Errorf("error while count: %v", err)
 	}

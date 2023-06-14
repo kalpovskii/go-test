@@ -3,9 +3,9 @@ package config
 type Config struct {
 	Port int `env:"SERVER_PORT" envDefault:"13005"`
 
-	PgPort   int `env:"PG_PORT" envDefault:"5458"`
-	PgHost   int `env:"PG_HOST" envDefault:"0.0.0.0"`
-	PgDBName int `env:"PG_DB_NAME" envDefault:"db"`
-	PgUser   int `env:"PG_USER" envDefault:"db"`
-	PgPwd    int `env:"PG_PWD" envDefault:"db"`
+	PgPort   string `env:"PG_PORT" envDefault:"5432"`
+	PgHost   string `env:"PG_HOST" envDefault:"0.0.0.0"`
+	PgDBName string `env:"PG_DB_NAME" envDefault:"postgres"`
+	PgUser   string `env:"PG_USER" envDefault:"postgres"`
+	PgPwd    string `env:"PG_PWD" envDefault:"db"`
 }

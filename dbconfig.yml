@@ -1,5 +1,4 @@
 development:
   dialect: postgres
-  datasource: dbname=db user=db password=db sslmode=disable port=5432
+  datasource: dbname=postgres user=postgres password=db sslmode=disable port=5432
   dir: migrations
-  table: migrations

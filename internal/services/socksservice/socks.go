@@ -74,11 +74,16 @@ func (ss *SocksService) Get(w http.ResponseWriter, r *http.Request) {
 		CottonPart: int64(cottonPart),
 	}
 
-	if _, err := ss.socksRepository.Get(r.Context(), &s, operation); err != nil {
+	totalCount, err := ss.socksRepository.Get(r.Context(), &s, operation)
+	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	_, err = fmt.Fprintf(w, "%d", totalCount)
+	if err != nil {
+		return
+	}
 }
 
 func (ss *SocksService) Delete(w http.ResponseWriter, r *http.Request) {
