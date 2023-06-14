@@ -11,6 +11,6 @@ type Socks struct {
 
 type SocksRepository interface {
 	Create(ctx context.Context, s *Socks) error
-	Get(ctx context.Context, s *Socks, operation string) error
+	Get(ctx context.Context, s *Socks, operation string) (int64, error)
 	Delete(ctx context.Context, s *Socks) error
 }
