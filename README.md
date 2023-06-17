@@ -1,3 +1,6 @@
+### Для запуска
+`docker compose up`
+
 ### Описание
 Реализовать приложение для автоматизации учёта носков на складе магазина. Кладовщик должен иметь возможность:
 - учесть приход и отпуск носков;
@@ -46,3 +49,9 @@
 - gorm
 - postgres
 - docker
+- sql-migrate
+
+### Скриншоты запросов
+![image](https://github.com/kalpovskii/go-test/assets/64479736/19956816-62a4-4c47-aef1-6f1c7603934a)
+![image](https://github.com/kalpovskii/go-test/assets/64479736/69da843e-c1aa-4371-9b45-503747b9a529)
+
