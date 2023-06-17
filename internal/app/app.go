@@ -7,10 +7,12 @@ import (
 	"awesomeProject/internal/services/socksservice"
 	"context"
 	"fmt"
+	migrate "github.com/rubenv/sql-migrate"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 )
 
@@ -21,6 +23,19 @@ func Run(cfg config.Config) error {
 	}
 
 	socksService := socksservice.New(socksgorm.New(db))
+	sqlDB, err := db.DB()
+	if err != nil {
+		// Обработка ошибки
+	}
+	migrationsDir := filepath.Join(os.Getenv("PWD"), "migrations")
+	migrations := &migrate.FileMigrationSource{
+		Dir: migrationsDir,
+	}
+	n, err := migrate.Exec(sqlDB, "postgres", migrations, migrate.Up)
+	if err != nil {
+		// Handle errors!
+	}
+	fmt.Printf("Applied %d migrations!\n", n)
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf("0.0.0.0:%d", cfg.Port),
