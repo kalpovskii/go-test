@@ -5,13 +5,36 @@ services:
     image: postgres:12.2-alpine
     restart: always
     ports:
-      - 5432
+      - "5458:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=db
       - POSTGRES_PASSWORD=db
-      - POSTGRES_DB=postgres
-
+      - POSTGRES_DB=db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U db -d postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      davai:
+        ipv4_address: 192.168.0.10
+  serv:
+    build: .
+    depends_on:
+      test-task-serv-db:
+        condition: service_healthy
+    networks:
+      davai:
+        ipv4_address: 192.168.0.20
+networks:
+  davai:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
 volumes:
   postgres-data:
