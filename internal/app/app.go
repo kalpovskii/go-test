@@ -25,7 +25,7 @@ func Run(cfg config.Config) error {
 	socksService := socksservice.New(socksgorm.New(db))
 	sqlDB, err := db.DB()
 	if err != nil {
-		// Обработка ошибки
+		fmt.Printf("Error while unwrapping gorm db: %s", err)
 	}
 	migrationsDir := filepath.Join(os.Getenv("PWD"), "migrations")
 	migrations := &migrate.FileMigrationSource{
@@ -33,7 +33,7 @@ func Run(cfg config.Config) error {
 	}
 	n, err := migrate.Exec(sqlDB, "postgres", migrations, migrate.Up)
 	if err != nil {
-		// Handle errors!
+		fmt.Printf("Error while migrate: %s", err)
 	}
 	fmt.Printf("Applied %d migrations!\n", n)
 
